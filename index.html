@@ -14,20 +14,58 @@
             font-size: 2rem;
             margin: 0px 15px;
         }
+
+        .outer {
+            width: 300px;
+            height: 50px;
+            border: 2px solid grey;
+            /* diplay flex use to horizontally align  */
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+        }
+
+        .red {
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .green {
+            width: 40px;
+            height: 40px;
+            background-color: green;
+            border-radius: 50%;
+        }
+
+        .blue {
+            width: 40px;
+            height: 40px;
+            background-color: blue;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
 <body>
     <h1>Canvas Board</h1>
-    <i class="far fa-square"></i>
-    <i class="fas fa-external-link-square-alt"></i>
+    <div class="outer">
+        <i class="far fa-square"></i>
+        <i class="fas fa-external-link-square-alt"></i>
+        <div class="red"></div>
+        <div class="green"></div>
+        <div class="blue"></div>
+    </div>
+
     <canvas></canvas>
 </body>
 <script>
     let canvasBoard = document.querySelector("canvas");
     let rectTool = document.querySelector(".fa-square");
     let lineTool = document.querySelector(".fa-external-link-square-alt");
-    let cTool = "rectTool";
+    let cTool = " ";
     // default height width is smaller 
     canvasBoard.height = window.innerHeight;
     canvasBoard.width = window.innerWidth;
@@ -47,12 +85,12 @@
     let iX, iY, fX, fY;
     body.addEventListener("mousedown",
         function (e) {
-            iX = e.clientX + boardLeft;
+            iX = e.clientX - boardLeft;
             iY = e.clientY - boardTop;
         })
     body.addEventListener("mouseup", function (e) {
         // console.log(e);
-        fX = e.clientX + boardLeft;;
+        fX = e.clientX - boardLeft;
         fY = e.clientY - boardTop;
         let width = fX - iX;
         let height = fY - iY;
@@ -67,7 +105,18 @@
         }
     })
 
-
+    let red = document.querySelector(".red");
+    red.addEventListener("click", function (e) {
+        tool.strokeStyle = "red";
+    })
+    let green = document.querySelector(".green");
+    green.addEventListener("click", function (e) {
+        tool.strokeStyle = "green";
+    })
+    let blue = document.querySelector(".blue");
+    blue.addEventListener("click", function (e) {
+        tool.strokeStyle = "blue";
+    })
 
 
 // // to draw a rectangle of size 400X400 with color green
